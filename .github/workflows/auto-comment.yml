@@ -1,0 +1,32 @@
+name: Auto Comment on Issue Label
+
+on:
+  issues:
+    types: [labeled]
+
+jobs:
+  comment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Add comment for bug label
+        if: github.event.label.name == 'bug'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: 'Thank you for reporting this bug. Our team will investigate and fix it.'
+            })
+      - name: Add comment for enhancement label
+        if: github.event.label.name == 'enhancement'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: 'Thanks for the enhancement suggestion! We appreciate your input.'
+            })
