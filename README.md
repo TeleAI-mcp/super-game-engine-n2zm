@@ -1,2 +1,3 @@
-# super-game-engine-n2zm
-Automated issue comment bot repository
+# Super Game Engine N2Zm
+
+Automated issue comment bot repository.
